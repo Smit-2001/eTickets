@@ -1,5 +1,6 @@
 ﻿using eTickets.Data;
 using eTickets.Data.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -19,6 +20,13 @@ namespace eTickets.Controllers
         {
             var allMovies = await _service.GetAllAsync(n=>n.Cinema);
             return View(allMovies);
+        }
+
+        //GET: Movies/Details/1
+        public async Task<IActionResult> Details(int id)
+        {
+            var movieDetail = await _service.GetMovieByIdAsync(id);
+            return View(movieDetail);
         }
     }
 }
